@@ -1,0 +1,282 @@
+/* style.css */
+
+body {
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+    font-family: 'Press Start 2P', cursive, monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: none;
+    image-rendering: pixelated;
+}
+
+/* Переконаємось, що всі елементи, що мають відношення до тексту, використовують цей шрифт */
+h1, h2,
+button,
+#notepad-text,
+.counter,
+.pixel-button {
+    font-family: 'Press Start 2P', cursive, monospace;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: none;
+    text-rendering: optimizeSpeed;
+}
+
+.main-wrapper {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.container {
+    background-color: #2a2a2a;
+    border: 2px solid #555;
+    border-radius: 0;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+    text-align: center;
+    width: 100%;
+    min-width: 300px;
+    box-sizing: border-box;
+}
+
+.main-controls {
+    max-width: 500px;
+}
+
+.right-column-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 400px;
+    width: 100%;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.notepad-container {
+    width: 100%;
+    text-align: left;
+}
+
+#notepad-text {
+    width: calc(100% - 2px);
+    height: 180px;
+    background-color: #0d0d0d;
+    color: #00ff00;
+    border: 1px solid #333;
+    border-radius: 0;
+    padding: 10px;
+    font-size: 0.9em;
+    resize: vertical;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px #006600;
+}
+
+/* ЗАГАЛЬНИЙ КЛАС ДЛЯ ВСІХ КНОПОК */
+.pixel-button {
+    background-color: #444;
+    color: #00ff00;
+    border: 1px solid #777;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    cursor: pointer;
+    border-radius: 0;
+    transition: none;
+    text-shadow: 1px 1px #006600, 2px 2px #006600;
+    box-shadow: 2px 2px 0 #006600;
+    display: inline-block;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0; /* Прибираємо стандартний марджін для h2, якщо він додається */
+}
+
+.pixel-button:hover {
+    background-color: #00ff00;
+    color: #1a1a1a;
+    border-color: #00cc00;
+    box-shadow: 1px 1px 0 #006600;
+    transform: translate(1px, 1px);
+}
+
+.pixel-button:active {
+    background-color: #009900;
+    box-shadow: 0 0 0 #006600;
+    transform: translate(2px, 2px);
+}
+
+
+/* Стилі для кнопок Блокнота */
+.notepad-container .pixel-button {
+    padding: 10px 20px;
+    font-size: 1em;
+}
+
+/* Стилі для кнопок Журналу подій */
+.game-log-container {
+    width: 100%;
+    text-align: left;
+    height: 250px;
+    background-color: #2a2a2a;
+    border-color: #006600;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+    padding-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+#game-log {
+    background-color: #0d0d0d;
+    border: 1px solid #333;
+    padding: 10px;
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+#game-log p {
+    color: #00ff00;
+    font-size: 0.85em;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px #006600;
+    line-height: 1.2;
+}
+
+.game-log-container .pixel-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Стилі для секції "Скинути все" */
+.reset-section {
+    width: 100%;
+    padding: 36px;
+    /* Видаляємо padding-top та padding-bottom з container,
+       якщо він додає зайвий простір до h2 */
+    /* padding: 0; */
+}
+
+/* Стилі для клікабельного заголовка "Скинути гру" */
+.reset-title-button {
+    color: #00ff00; /* Колір тексту кнопки */
+    /* Перевизначаємо деякі стилі для h2, щоб він поводився як кнопка */
+    padding: 24px 25px; /* Специфічний відступ для цього елемента */
+    font-size: 1.2em; /* Специфічний шрифт для цього елемента */
+    display: block; /* Важливо: зробити його блочним, щоб padding і margin працювали */
+    margin: 0 auto; /* Центрування */
+    background-color: #444; /* Фон, як у інших кнопок */
+    border: 1px solid #777; /* Рамка */
+    box-shadow: 2px 2px 0 #006600; /* Тінь */
+    text-shadow: 1px 1px #006600, 2px 2px #006600; /* Тінь тексту */
+    cursor: pointer;
+    transition: none;
+    border-radius: 0;
+}
+
+/* Ховер та активний стан для кнопки "Скинути гру" */
+.reset-title-button:hover {
+    background-color: #00ff00;
+    color: #1a1a1a;
+    border-color: #00cc00;
+    box-shadow: 1px 1px 0 #006600;
+    transform: translate(1px, 1px);
+}
+
+.reset-title-button:active {
+    background-color: #009900;
+    box-shadow: 0 0 0 #006600;
+    transform: translate(2px, 2px);
+}
+
+
+/* Існуючі стилі для лічильників */
+h1 {
+    color: #00ff00;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px #006600;
+}
+
+.counter-section {
+    margin-bottom: 25px;
+}
+
+.counter-section h2 {
+    color: #ccc;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    text-shadow: 1px 1px #333;
+}
+
+.counter {
+    font-size: 3em;
+    color: #00ff00;
+    margin-bottom: 15px;
+    background-color: #0d0d0d;
+    padding: 10px 20px;
+    border-radius: 0;
+    display: inline-block;
+    min-width: 60px;
+    border: 1px solid #333;
+    box-shadow: 2px 2px #006600;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.buttons .pixel-button {
+    padding: 15px 30px;
+    font-size: 1.5em;
+    margin: 0;
+    flex-grow: 1;
+    max-width: 150px;
+}
+
+
+.number-selector {
+    margin-top: 30px;
+}
+
+.number-selector label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #ccc;
+    text-shadow: 1px 1px #333;
+}
+
+.number-selector input[type="number"] {
+    background-color: #0d0d0d;
+    color: #00ff00;
+    border: 1px solid #333;
+    padding: 10px;
+    font-size: 1.5em;
+    width: 80px;
+    text-align: center;
+    border-radius: 0;
+    -moz-appearance: textfield;
+    box-shadow: 2px 2px #006600;
+}
+
+.number-selector input::-webkit-outer-spin-button,
+.number-selector input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

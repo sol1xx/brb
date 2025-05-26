@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buckshot Roulette Buddy</title>
+    <link rel="icon" href="logo.jpg" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="container main-controls">
+            <h1>Buckshot Roulette Buddy</h1>
+
+            <div class="counter-section">
+                <h2>Бойові патрони</h2>
+                <div id="live-bullets-count" class="counter">0</div>
+                <div class="buttons">
+                    <button class="pixel-button" onclick="changeBulletCount('live', -1)">-</button>
+                    <button class="pixel-button" onclick="changeBulletCount('live', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="counter-section">
+                <h2>Холості патрони</h2>
+                <div id="blank-bullets-count" class="counter">0</div>
+                <div class="buttons">
+                    <button class="pixel-button" onclick="changeBulletCount('blank', -1)">-</button>
+                    <button class="pixel-button" onclick="changeBulletCount('blank', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="counter-section">
+                <h2>Раунд</h2>
+                <div id="round-number-display" class="counter">0</div>
+                <div class="buttons">
+                    <button class="pixel-button" onclick="changeRound(-1)">-</button>
+                    <button class="pixel-button" onclick="changeRound(1)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-column-wrapper">
+            <div class="notepad-container container">
+                <h2>Блокнот</h2>
+                <textarea id="notepad-text" placeholder="Ваші нотатки тут..."></textarea>
+                <button class="pixel-button" onclick="clearNotepad()">Очистити блокнот</button>
+            </div>
+
+            <div class="game-log-container container">
+                <h2>Журнал подій</h2>
+                <div id="game-log"></div>
+                <button class="pixel-button" onclick="clearGameLog()">Очистити журнал</button>
+            </div>
+
+            <div class="reset-section container">
+                <h2 class="pixel-button reset-title-button" onclick="resetGame()">Скинути гру</h2>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let liveBullets = 0;
+        let blankBullets = 0;
+        let currentRound = 0;
+
+        function addToLog(message) {
+            const logElement = document.getElementById('game-log');
+            const newEntry = document.createElement('p');
+            const timestamp = new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            newEntry.textContent = `[${timestamp}] ${message}`;
+            logElement.prepend(newEntry);
+
+            const maxLogEntries = 50;
+            while (logElement.children.length > maxLogEntries) {
+                logElement.removeChild(logElement.lastChild);
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById('live-bullets-count').textContent = liveBullets;
+            document.getElementById('blank-bullets-count').textContent = blankBullets;
+            document.getElementById('round-number-display').textContent = currentRound;
+        }
+
+        function changeBulletCount(type, amount) {
+            const oldLive = liveBullets;
+            const oldBlank = blankBullets;
+
+            if (type === 'live') {
+                liveBullets += amount;
+                if (liveBullets < 0) liveBullets = 0;
+            } else if (type === 'blank') {
+                blankBullets += amount;
+                if (blankBullets < 0) blankBullets = 0;
+            }
+
+            if (liveBullets !== oldLive || blankBullets !== oldBlank) {
+                let logMessage = '';
+                if (amount > 0) {
+                    logMessage = `Додано ${amount} ${type === 'live' ? 'бойових' : 'холостих'} патронів.`;
+                } else {
+                    logMessage = `Видалено ${Math.abs(amount)} ${type === 'live' ? 'бойових' : 'холостих'} патронів.`;
+                }
+                addToLog(logMessage);
+            }
+            
+            updateDisplay();
+        }
+
+        function changeRound(amount) {
+            let previousRound = currentRound;
+            currentRound += amount;
+            if (currentRound < 0) {
+                currentRound = 0;
+            }
+
+            if (currentRound !== previousRound) {
+                liveBullets = 0;
+                blankBullets = 0;
+                addToLog(`Раунд змінено на: ${currentRound}. Патрони скинуто.`);
+            }
+            
+            updateDisplay();
+        }
+
+        function clearNotepad() {
+            document.getElementById('notepad-text').value = '';
+            addToLog('Блокнот очищено.');
+        }
+
+        function clearGameLog() {
+            document.getElementById('game-log').innerHTML = '';
+            addToLog('Журнал подій очищено.');
+        }
+
+        function resetGame() {
+            liveBullets = 0;
+            blankBullets = 0;
+            currentRound = 0;
+            document.getElementById('notepad-text').value = '';
+            document.getElementById('game-log').innerHTML = '';
+            updateDisplay();
+            addToLog('**Гру повністю скинуто! Нова партія розпочата.**');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateDisplay();
+            addToLog('Гра розпочата. Ласкаво просимо!');
+        });
+    </script>
+</body>
+</html>

@@ -9,6 +9,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="disclaimer-modal" class="modal-overlay">
+        <div class="modal-content container">
+            <span class="close-button pixel-button" onclick="closeModal()">&times;</span>
+            <h2>ВАЖЛИВО!</h2>
+            <p>Цей сайт є <strong>неофіційним помічником</strong> для гри "Buckshot Roulette". Він створений фанатами для фанатів і не пов'язаний з офіційними розробниками гри.</p>
+            <p>Вся інформація та функціонал призначені виключно для розважальних цілей і не повинні сприйматися як офіційні дані або вказівки від розробників.</p>
+            <p>Будь ласка, підтримуйте офіційні релізи та розробників гри!</p>
+        </div>
+    </div>
+
     <div class="main-wrapper">
         <div class="container main-controls">
             <h1>Buckshot Roulette Buddy</h1>
@@ -55,7 +65,18 @@
             </div>
 
             <div class="reset-section container">
-                <h2 class="pixel-button reset-title-button" onclick="resetGame()">Скинути гру</h2>
+                <div class="reset-buttons-wrapper">
+                    <h2 class="pixel-button reset-title-button" onclick="resetGame()">Скинути гру</h2>
+                    <button class="info-button pixel-button" onclick="openModal()">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z" stroke="#00ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14 2V8H20" stroke="#00ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 13H8" stroke="#00ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 17H8" stroke="#00ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10 9H8" stroke="#00ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -136,13 +157,40 @@
         }
 
         function resetGame() {
-            liveBullets = 0;
-            blankBullets = 0;
-            currentRound = 0;
-            document.getElementById('notepad-text').value = '';
-            document.getElementById('game-log').innerHTML = '';
-            updateDisplay();
-            addToLog('**Гру повністю скинуто! Нова партія розпочата.**');
+            // Ці рядки коду, що стосуються glitchOverlay, ВИДАЛЕНО
+            // const glitchOverlay = document.getElementById('glitch-overlay');
+            // glitchOverlay.style.display = 'block';
+
+            // setTimeout(() => {
+                liveBullets = 0;
+                blankBullets = 0;
+                currentRound = 0;
+                document.getElementById('notepad-text').value = '';
+                document.getElementById('game-log').innerHTML = '';
+                updateDisplay();
+                addToLog('**Гру повністю скинуто! Нова партія розпочата.**');
+            // }, 100);
+
+            // setTimeout(() => {
+            //     glitchOverlay.style.display = 'none';
+            // }, 3000);
+        }
+
+        // Функції для модального вікна
+        function openModal() {
+            document.getElementById('disclaimer-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('disclaimer-modal').style.display = 'none';
+        }
+
+        // Закриття модалки по кліку поза вікном
+        window.onclick = function(event) {
+            const modal = document.getElementById('disclaimer-modal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {

@@ -16,6 +16,7 @@ body {
     -webkit-font-smoothing: none;
     -moz-osx-font-smoothing: none;
     image-rendering: pixelated;
+    position: relative;
 }
 
 /* Переконаємось, що всі елементи, що мають відношення до тексту, використовують цей шрифт */
@@ -23,7 +24,9 @@ h1, h2,
 button,
 #notepad-text,
 .counter,
-.pixel-button {
+.pixel-button,
+.modal-content p,
+.modal-content h2 { /* Додаємо елементи модального вікна */
     font-family: 'Press Start 2P', cursive, monospace;
     -webkit-font-smoothing: none;
     -moz-osx-font-smoothing: none;
@@ -99,7 +102,8 @@ button,
     display: inline-block;
     text-align: center;
     box-sizing: border-box;
-    margin: 0; /* Прибираємо стандартний марджін для h2, якщо він додається */
+    margin: 0;
+    flex-shrink: 0; /* Запобігає стисканню кнопок */
 }
 
 .pixel-button:hover {
@@ -161,45 +165,54 @@ button,
     margin: 0 auto;
 }
 
-/* Стилі для секції "Скинути все" */
+/* Секція "Скинути гру" */
 .reset-section {
     width: 100%;
-    padding: 36px;
-    /* Видаляємо padding-top та padding-bottom з container,
-       якщо він додає зайвий простір до h2 */
-    /* padding: 0; */
+    padding: 46px;
+    /* Зробимо секцію вужчою, наприклад, max-width */
+    max-width: 400px; /* Можеш налаштувати ширину */
+    margin: 0 auto; /* Центруємо, якщо вона вужча за батьківський контейнер */
+}
+
+/* Обгортка для кнопок "Скинути гру" та "Інфо" */
+.reset-buttons-wrapper {
+    display: flex;
+    align-items: center; /* Вирівнювання по центру по вертикалі */
+    gap: 10px; /* Відступ між елементами */
+    justify-content: center; /* Центрування вмісту */
+    width: 100%;
 }
 
 /* Стилі для клікабельного заголовка "Скинути гру" */
 .reset-title-button {
-    color: #00ff00; /* Колір тексту кнопки */
-    /* Перевизначаємо деякі стилі для h2, щоб він поводився як кнопка */
-    padding: 24px 25px; /* Специфічний відступ для цього елемента */
-    font-size: 1.2em; /* Специфічний шрифт для цього елемента */
-    display: block; /* Важливо: зробити його блочним, щоб padding і margin працювали */
-    margin: 0 auto; /* Центрування */
-    background-color: #444; /* Фон, як у інших кнопок */
-    border: 1px solid #777; /* Рамка */
-    box-shadow: 2px 2px 0 #006600; /* Тінь */
-    text-shadow: 1px 1px #006600, 2px 2px #006600; /* Тінь тексту */
-    cursor: pointer;
-    transition: none;
-    border-radius: 0;
+    flex-grow: 1; /* Дозволяє кнопці займати доступний простір */
+    max-width: calc(100% - 60px); /* Залишаємо місце для інфо-кнопки */
+    font-size: 1.2em; /* Розмір шрифту, як раніше */
+    padding: 12px 15px; /* Зменшуємо горизонтальний padding для компактності */
 }
 
-/* Ховер та активний стан для кнопки "Скинути гру" */
-.reset-title-button:hover {
-    background-color: #00ff00;
-    color: #1a1a1a;
-    border-color: #00cc00;
-    box-shadow: 1px 1px 0 #006600;
-    transform: translate(1px, 1px);
+
+/* Стилі для нової кнопки інфо */
+.info-button {
+    width: 45px; /* Квадратна кнопка */
+    height: 45px;
+    padding: 5px; /* Зменшуємо padding, щоб іконка була більшою */
+    display: flex; /* Для центрування SVG */
+    justify-content: center;
+    align-items: center;
+    font-size: 1em; /* Шрифт тут не сильно важливий, бо є SVG */
+    flex-shrink: 0; /* Важливо, щоб кнопка не стискалася */
 }
 
-.reset-title-button:active {
-    background-color: #009900;
-    box-shadow: 0 0 0 #006600;
-    transform: translate(2px, 2px);
+.info-button svg {
+    width: 100%; /* Розтягуємо SVG на всю кнопку */
+    height: 100%;
+    stroke: #00ff00; /* Колір контуру SVG */
+    fill: none; /* Заповнення SVG */
+}
+
+.info-button:hover svg {
+    stroke: #1a1a1a; /* Колір контуру при наведенні */
 }
 
 
@@ -279,4 +292,94 @@ h1 {
 .number-selector input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+/* Стилі для модального вікна */
+.modal-overlay {
+    display: none; /* Приховано за замовчуванням */
+    position: fixed; /* Поверх всього екрана */
+    z-index: 10000; /* Дуже високий z-index */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Напівпрозорий чорний фон */
+    justify-content: center; /* Центрування вмісту по горизонталі */
+    align-items: center; /* Центрування вмісту по вертикалі */
+}
+
+.modal-content {
+    background-color: #2a2a2a; /* Колір фону контейнера */
+    color: #f0f0f0;
+    border: 2px solid #555;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5); /* Зелений неоновий ефект */
+    padding: 40px;
+    max-width: 500px; /* Максимальна ширина модалки */
+    width: 90%; /* Ширина на менших екранах */
+    position: relative; /* Для позиціонування кнопки закриття */
+    text-align: center;
+    border-radius: 0; /* Без заокруглень */
+}
+
+.modal-content h2 {
+    color: #00ff00; /* Яскраво-зелений заголовок */
+    text-shadow: 2px 2px #006600;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.modal-content p {
+    font-size: 1em;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    color: #ccc;
+    text-shadow: 1px 1px #333;
+}
+
+.modal-content p strong {
+    color: #00ff00; /* Виділення важливого тексту */
+    text-shadow: 1px 1px #006600;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #444; /* Колір кнопки закриття */
+    color: #00ff00;
+    border: 1px solid #777;
+    width: 30px; /* Розмір кнопки */
+    height: 30px;
+    padding: 0; /* Прибираємо padding, щоб був лише хрестик */
+    line-height: 28px; /* Вирівнюємо хрестик по центру */
+    font-size: 1.5em; /* Розмір хрестика */
+    cursor: pointer;
+    border-radius: 0;
+    box-shadow: 2px 2px 0 #006600;
+}
+
+.close-button:hover {
+    background-color: #00ff00;
+    color: #1a1a1a;
+    border-color: #00cc00;
+    box-shadow: 1px 1px 0 #006600;
+    transform: translate(1px, 1px);
+}
+
+.close-button:active {
+    background-color: #009900;
+    box-shadow: 0 0 0 #006600;
+    transform: translate(2px, 2px);
+}
+
+.info-button svg {
+    width: 100%;
+    height: 100%;
+    stroke: #00ff00; /* Колір обведення SVG за замовчуванням (зелений) */
+    fill: none; /* Заповнення SVG за замовчуванням (немає) */
+}
+
+.info-button:hover svg {
+    stroke: #1a1a1a; /* Колір обведення при наведенні (чорний) */
+    fill: #1a1a1a;   /* Колір заповнення при наведенні (чорний) */
 }

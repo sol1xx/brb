@@ -4,20 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buckshot Roulette Buddy</title>
-    <link rel="apple-touch-icon" href="logo.jpg">
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="logo.jpg" type="image/png">
+    <link rel="apple-touch-icon" href="./logo-192x192.png">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" href="./logo-192x192.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="disclaimer-modal" class="modal-overlay">
         <div class="modal-content container">
-            <span class="close-button pixel-button" onclick="closeModal()">&times;</span>
+            <span class="close-button pixel-button" onclick="closeModal('disclaimer-modal')">&times;</span>
             <h2 data-uk="ВАЖЛИВО!" data-en="IMPORTANT!">ВАЖЛИВО!</h2>
             <p data-uk="Цей сайт є <strong>неофіційним помічником</strong> для гри &quot;Buckshot Roulette&quot;. Він створений фанатами для фанатів і не пов'язаний з офіційними розробниками гри." data-en="This site is an <strong>unofficial companion</strong> for the game &quot;Buckshot Roulette&quot;. It is created by fans for fans and is not affiliated with the official game developers.">Цей сайт є **неофіційним помічником** для гри "Buckshot Roulette". Він створений фанатами для фанатів і не пов'язаний з офіційними розробниками гри.</p>
             <p data-uk="Вся інформація та функціонал призначені виключно для розважальних цілей і не повинні сприйматися як офіційні дані або вказівки від розробників." data-en="All information and functionality are intended solely for entertainment purposes and should not be taken as official data or instructions from the developers.">Вся інформація та функціонал призначені виключно для розважальних цілей і не повинні сприйматися як офіційні дані або вказівки від розробників.</p>
             <p data-uk="Будь ласка, підтримуйте офіційні релізи та розробників гри!" data-en="Please support the official releases and game developers!">Будь ласка, підтримуйте офіційні релізи та розробників гри!</p>
+        </div>
+    </div>
+
+    <div id="install-ios-modal" class="modal-overlay">
+        <div class="modal-content container">
+            <span class="close-button pixel-button" onclick="closeModal('install-ios-modal')">&times;</span>
+            <h2 data-uk="Встановити на iPhone" data-en="Install on iPhone">Встановити на iPhone</h2>
+            <p data-uk="Щоб додати цей додаток на головний екран вашого iPhone:" data-en="To add this app to your iPhone's home screen:">Щоб додати цей додаток на головний екран вашого iPhone:</p>
+            <ol>
+                <li data-uk="Натисніть на іконку &quot;Поділитися&quot; <svg class='ios-share-icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8'></path><polyline points='16 6 12 2 8 6'></polyline><line x1='12' y1='2' x2='12' y2='15'></line></svg> в нижній частині браузера Safari."
+                    data-en="Tap the &quot;Share&quot; icon <svg class='ios-share-icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8'></path><polyline points='16 6 12 2 8 6'></polyline><line x1='12' y1='2' x2='12' y2='15'></line></svg> at the bottom of your Safari browser.">Натисніть на іконку "Поділитися" <svg class='ios-share-icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8'></path><polyline points='16 6 12 2 8 6'></polyline><line x1='12' y1='2' x2='12' y2='15'></line></svg> в нижній частині браузера Safari.</li>
+                <li data-uk="Прокрутіть меню вниз і виберіть &quot;На екран Додому&quot;." data-en="Scroll down the menu and select &quot;Add to Home Screen&quot;.">Прокрутіть меню вниз і виберіть "На екран Додому".</li>
+                <li data-uk="Натисніть &quot;Додати&quot; у верхньому правому куті." data-en="Tap &quot;Add&quot; in the top right corner.">Натисніть "Додати" у верхньому правому куті.</li>
+            </ol>
+            <p data-uk="Додаток з'явиться на вашому головному екрані як звичайна програма." data-en="The app will appear on your home screen like a regular application.">Додаток з'явиться на вашому головному екрані як звичайна програма.</p>
         </div>
     </div>
 
@@ -69,22 +84,38 @@
             <div class="reset-section container">
                 <div class="reset-buttons-wrapper">
                     <h2 class="pixel-button reset-title-button" onclick="resetGame()" data-uk="Скинути гру" data-en="Reset Game">Скинути гру</h2>
-                    <button class="info-button pixel-button" onclick="openModal()">
+                </div>
+                <div class="utility-buttons-wrapper">
+                    <button class="info-button pixel-button" onclick="openModal('disclaimer-modal')" title="Про гру">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z" stroke="#00ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M14 2V8H20" stroke="#00ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M16 13H8" stroke="#00ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M16 17H8" stroke="#00ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M10 9H8" stroke="#00ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z" stroke="" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14 2V8H20" stroke="" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 13H8" stroke="" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 17H8" stroke="" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10 9H8" stroke="" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </button>
-                    <button class="info-button pixel-button" onclick="toggleLanguage()" id="language-toggle-button">
+                    <button class="info-button pixel-button" onclick="toggleLanguage()" id="language-toggle-button" title="Перекласти Англійською">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe">
                             <circle cx="12" cy="12" r="10"></circle>
                             <line x1="2" y1="12" x2="22" y2="12"></line>
                             <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                         </svg>
                     </button>
+
+                    <div class="dropdown">
+                        <button class="info-button pixel-button dropdown-toggle" id="download-button" title="Завантажити">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="#" id="install-pwa-pc" class="pixel-button-small" data-uk="Встановити на ПК" data-en="Install on PC">Встановити на ПК</a>
+                            <a href="#" id="install-pwa-ios" class="pixel-button-small" data-uk="Встановити на iPhone" data-en="Install on iPhone">Встановити на iPhone</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -103,6 +134,12 @@
                 'disclaimer_p1': 'Цей сайт є <strong>неофіційним помічником</strong> для гри "Buckshot Roulette". Він створений фанатами для фанатів і не пов\'язаний з офіційними розробниками гри.',
                 'disclaimer_p2': 'Вся інформація та функціонал призначені виключно для розважальних цілей і не повинні сприйматися як офіційні дані або вказівки від розробників.',
                 'disclaimer_p3': 'Будь ласка, підтримуйте офіційні релізи та розробників гри!',
+                'install_ios_title': 'Встановити на iPhone',
+                'install_ios_p1': 'Щоб додати цей додаток на головний екран вашого iPhone:',
+                'install_ios_li1': 'Натисніть на іконку &quot;Поділитися&quot; <svg class=\'ios-share-icon\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\'><path d=\'M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8\'></path><polyline points=\'16 6 12 2 8 6\'></polyline><line x1=\'12\' y1=\'2\' x2=\'12\' y2=\'15\'></line></svg> в нижній частині браузера Safari.',
+                'install_ios_li2': 'Прокрутіть меню вниз і виберіть &quot;На екран Додому&quot;.',
+                'install_ios_li3': 'Натисніть &quot;Додати&quot; у верхньому правому куті.',
+                'install_ios_p2': 'Додаток з\'явиться на вашому головному екрані як звичайна програма.',
                 'live_bullets_title': 'Бойові патрони',
                 'blank_bullets_title': 'Холості патрони',
                 'round_title': 'Раунд',
@@ -121,15 +158,23 @@
                 'log_game_log_clear': 'Журнал подій очищено.',
                 'log_game_reset': '**Гру повністю скинуто! Нова партія розпочата.**',
                 'log_game_start': 'Гра розпочата. Ласкаво просимо!',
-                'translate_button_alt': 'Перекласти Англійською', // This text won't be visible on the button itself now
-                'translate_button_uk_title': 'Перекласти Англійською', // Tooltip/title for UK
-                'translate_button_en_title': 'Translate to Ukrainian' // Tooltip/title for EN
+                'translate_button_alt': 'Перекласти Англійською',
+                'translate_button_uk_title': 'Перекласти Англійською',
+                'translate_button_en_title': 'Translate to Ukrainian',
+                'install_on_pc': 'Встановити на ПК',
+                'install_on_iphone': 'Встановити на iPhone'
             },
             'en': {
                 'disclaimer_title': 'IMPORTANT!',
                 'disclaimer_p1': 'This site is an <strong>unofficial companion</strong> for the game &quot;Buckshot Roulette&quot;. It is created by fans for fans and is not affiliated with the official game developers.',
                 'disclaimer_p2': 'All information and functionality are intended solely for entertainment purposes and should not be taken as official data or instructions from the developers.',
                 'disclaimer_p3': 'Please support the official releases and game developers!',
+                'install_ios_title': 'Install on iPhone',
+                'install_ios_p1': 'To add this app to your iPhone\'s home screen:',
+                'install_ios_li1': 'Tap the &quot;Share&quot; icon <svg class=\'ios-share-icon\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\'><path d=\'M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8\'></path><polyline points=\'16 6 12 2 8 6\'></polyline><line x1=\'12\' y1=\'2\' x2=\'12\' y2=\'15\'></line></svg> at the bottom of your Safari browser.',
+                'install_ios_li2': 'Scroll down the menu and select &quot;Add to Home Screen&quot;.',
+                'install_ios_li3': 'Tap &quot;Add&quot; in the top right corner.',
+                'install_ios_p2': 'The app will appear on your home screen like a regular application.',
                 'live_bullets_title': 'Live Rounds',
                 'blank_bullets_title': 'Blank Rounds',
                 'round_title': 'Round',
@@ -148,9 +193,11 @@
                 'log_game_log_clear': 'Game log cleared.',
                 'log_game_reset': '**Game fully reset! New game started.**',
                 'log_game_start': 'Game started. Welcome!',
-                'translate_button_alt': 'Translate to Ukrainian', // This text won't be visible on the button itself now
-                'translate_button_uk_title': 'Translate to Ukrainian', // Tooltip/title for UK
-                'translate_button_en_title': 'Перекласти Українською' // Tooltip/title for EN
+                'translate_button_alt': 'Translate to Ukrainian',
+                'translate_button_uk_title': 'Translate to Ukrainian',
+                'translate_button_en_title': 'Перекласти Українською',
+                'install_on_pc': 'Install on PC',
+                'install_on_iphone': 'Install on iPhone'
             }
         };
 
@@ -161,9 +208,9 @@
             const placeholderEn = element.dataset.enPlaceholder;
 
             if (lang === 'en' && enText !== undefined) {
-                element.textContent = enText;
+                element.innerHTML = enText; // Use innerHTML to parse SVG
             } else if (lang === 'uk' && ukText !== undefined) {
-                element.textContent = ukText;
+                element.innerHTML = ukText; // Use innerHTML to parse SVG
             }
 
             if (element.tagName === 'TEXTAREA') {
@@ -177,13 +224,35 @@
 
         function updateAllTranslations(lang) {
             document.querySelectorAll('[data-uk]').forEach(element => {
-                // For disclaimer modal paragraphs, use innerHTML to preserve strong tags
-                // Check if element is a paragraph within the disclaimer modal
-                if (element.tagName === 'P' && element.closest('#disclaimer-modal')) {
-                    // Assuming data-translation-key is set on these paragraphs for direct mapping
+                // Handle specific elements in modal with data-translation-key (like paragraphs and list items)
+                if (element.closest('#disclaimer-modal')) {
                     const translationKey = element.dataset.translationKey;
                     if (translationKey && translations[lang][translationKey]) {
                         element.innerHTML = translations[lang][translationKey];
+                    } else {
+                        // Fallback for other elements within the modal that don't have a specific key
+                        const originalUKText = element.dataset.uk;
+                        const originalENText = element.dataset.en;
+                        if (lang === 'en' && originalENText) {
+                            element.innerHTML = originalENText;
+                        } else if (lang === 'uk' && originalUKText) {
+                            element.innerHTML = originalUKText;
+                        }
+                    }
+                } else if (element.closest('#install-ios-modal')) {
+                    // Specific translation for iOS modal elements
+                    const translationKey = element.dataset.translationKey;
+                    if (translationKey && translations[lang][translationKey]) {
+                        element.innerHTML = translations[lang][translationKey];
+                    } else {
+                        // For list items with embedded SVG, need to use innerHTML
+                        const originalUKText = element.dataset.uk;
+                        const originalENText = element.dataset.en;
+                        if (lang === 'en' && originalENText) {
+                            element.innerHTML = originalENText;
+                        } else if (lang === 'uk' && originalUKText) {
+                            element.innerHTML = originalUKText;
+                        }
                     }
                 } else {
                     translateElement(element, lang);
@@ -193,60 +262,85 @@
                 translateElement(element, lang);
             });
 
-            // Specific update for disclaimer modal H2 and paragraphs
+            // Specific updates for modal titles and content that aren't using data-translation-key yet
             const disclaimerModal = document.getElementById('disclaimer-modal');
-            disclaimerModal.querySelector('h2').textContent = translations[lang]['disclaimer_title'];
-            // Explicitly set data-translation-key for paragraphs if not already there
-            disclaimerModal.querySelector('p:nth-of-type(1)').innerHTML = translations[lang]['disclaimer_p1'];
-            disclaimerModal.querySelector('p:nth-of-type(2)').innerHTML = translations[lang]['disclaimer_p2'];
-            disclaimerModal.querySelector('p:nth-of-type(3)').innerHTML = translations[lang]['disclaimer_p3'];
+            if (disclaimerModal) {
+                disclaimerModal.querySelector('h2').textContent = translations[lang]['disclaimer_title'];
+                disclaimerModal.querySelector('p:nth-of-type(1)').innerHTML = translations[lang]['disclaimer_p1'];
+                disclaimerModal.querySelector('p:nth-of-type(2)').innerHTML = translations[lang]['disclaimer_p2'];
+                disclaimerModal.querySelector('p:nth-of-type(3)').innerHTML = translations[lang]['disclaimer_p3'];
+            }
 
-            // Update title/tooltip for the language button
+            const installIosModal = document.getElementById('install-ios-modal');
+            if (installIosModal) {
+                installIosModal.querySelector('h2').textContent = translations[lang]['install_ios_title'];
+                installIosModal.querySelector('p:nth-of-type(1)').innerHTML = translations[lang]['install_ios_p1'];
+                // These are already handled by data-uk/data-en with innerHTML in the loop,
+                // but good to keep these for clarity if they were more complex.
+                // For now, they are correctly handled by the general data-uk loop above due to innerHTML.
+                // installIosModal.querySelector('ol li:nth-of-type(1)').innerHTML = translations[lang]['install_ios_li1'];
+                // installIosModal.querySelector('ol li:nth-of-type(2)').innerHTML = translations[lang]['install_ios_li2'];
+                // installIosModal.querySelector('ol li:nth-of-type(3)').innerHTML = translations[lang]['install_ios_li3'];
+                installIosModal.querySelector('p:nth-of-type(2)').innerHTML = translations[lang]['install_ios_p2'];
+            }
+            
             const translateButton = document.getElementById('language-toggle-button');
-            translateButton.title = lang === 'uk' ? translations[lang]['translate_button_uk_title'] : translations[lang]['translate_button_en_title'];
+            if (translateButton) {
+                translateButton.title = lang === 'uk' ? translations[lang]['translate_button_uk_title'] : translations[lang]['translate_button_en_title'];
+            }
 
-            // Re-translate existing log entries
+            // Update dropdown menu items
+            const installPwaPcLink = document.getElementById('install-pwa-pc');
+            if (installPwaPcLink) {
+                installPwaPcLink.textContent = translations[lang]['install_on_pc'];
+            }
+            const installPwaIosLink = document.getElementById('install-pwa-ios');
+            if (installPwaIosLink) {
+                installPwaIosLink.textContent = translations[lang]['install_on_iphone'];
+            }
+
             updateLogTranslations(lang);
         }
 
         function updateLogTranslations(lang) {
             const logElement = document.getElementById('game-log');
+            if (!logElement) return;
+
             Array.from(logElement.children).forEach(entry => {
                 const originalKey = entry.dataset.logKey;
                 const originalParams = JSON.parse(entry.dataset.logParams || '{}');
                 if (originalKey) {
                     let message = translations[lang][originalKey];
                     for (const key in originalParams) {
-                        // Ensure replacement handles string conversion for numbers
                         message = message.replace(`{${key}}`, String(originalParams[key]));
                     }
-                    // Extract timestamp and prepend to the translated message
                     const timestampMatch = entry.textContent.match(/^\[.*?\]/);
                     const timestamp = timestampMatch ? timestampMatch[0] : '';
-                    entry.textContent = `${timestamp} ${message}`.trim(); // Trim to remove potential double space
+                    entry.textContent = `${timestamp} ${message}`.trim();
                 }
             });
         }
 
-
         function toggleLanguage() {
             currentLang = currentLang === 'uk' ? 'en' : 'uk';
-            document.documentElement.lang = currentLang; // Update html lang attribute
+            document.documentElement.lang = currentLang;
             updateAllTranslations(currentLang);
         }
 
         function addToLog(messageKey, params = {}) {
             const logElement = document.getElementById('game-log');
+            if (!logElement) return;
+
             const newEntry = document.createElement('p');
             const timestamp = new Date().toLocaleTimeString(currentLang === 'uk' ? 'uk-UA' : 'en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
             let message = translations[currentLang][messageKey];
             for (const key in params) {
-                message = message.replace(`{${key}}`, String(params[key])); // Convert param to string
+                message = message.replace(`{${key}}`, String(params[key]));
             }
             newEntry.textContent = `[${timestamp}] ${message}`;
-            newEntry.dataset.logKey = messageKey; // Store original key
-            newEntry.dataset.logParams = JSON.stringify(params); // Store original params
+            newEntry.dataset.logKey = messageKey;
+            newEntry.dataset.logParams = JSON.stringify(params);
             logElement.prepend(newEntry);
 
             const maxLogEntries = 50;
@@ -256,9 +350,13 @@
         }
 
         function updateDisplay() {
-            document.getElementById('live-bullets-count').textContent = liveBullets;
-            document.getElementById('blank-bullets-count').textContent = blankBullets;
-            document.getElementById('round-number-display').textContent = currentRound;
+            const liveBulletsCount = document.getElementById('live-bullets-count');
+            const blankBulletsCount = document.getElementById('blank-bullets-count');
+            const roundNumberDisplay = document.getElementById('round-number-display');
+
+            if (liveBulletsCount) liveBulletsCount.textContent = liveBullets;
+            if (blankBulletsCount) blankBulletsCount.textContent = blankBullets;
+            if (roundNumberDisplay) roundNumberDisplay.textContent = currentRound;
         }
 
         function changeBulletCount(type, amount) {
@@ -303,12 +401,14 @@
         }
 
         function clearNotepad() {
-            document.getElementById('notepad-text').value = '';
+            const notepadText = document.getElementById('notepad-text');
+            if (notepadText) notepadText.value = '';
             addToLog('log_notepad_clear');
         }
 
         function clearGameLog() {
-            document.getElementById('game-log').innerHTML = '';
+            const gameLog = document.getElementById('game-log');
+            if (gameLog) gameLog.innerHTML = '';
             addToLog('log_game_log_clear');
         }
 
@@ -316,46 +416,113 @@
             liveBullets = 0;
             blankBullets = 0;
             currentRound = 0;
-            document.getElementById('notepad-text').value = '';
-            document.getElementById('game-log').innerHTML = '';
+            const notepadText = document.getElementById('notepad-text');
+            if (notepadText) notepadText.value = '';
+            const gameLog = document.getElementById('game-log');
+            if (gameLog) gameLog.innerHTML = '';
             updateDisplay();
             addToLog('log_game_reset');
         }
 
-        // Функції для модального вікна
-        function openModal() {
-            document.getElementById('disclaimer-modal').style.display = 'flex';
+        // Функції для модальних вікон
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) modal.style.display = 'flex';
         }
 
-        function closeModal() {
-            document.getElementById('disclaimer-modal').style.display = 'none';
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) modal.style.display = 'none';
         }
 
         // Закриття модалки по кліку поза вікном
         window.onclick = function(event) {
-            const modal = document.getElementById('disclaimer-modal');
-            if (event.target == modal) {
-                modal.style.display = "none";
+            const disclaimerModal = document.getElementById('disclaimer-modal');
+            const installIosModal = document.getElementById('install-ios-modal');
+            const dropdownContent = document.querySelector('.dropdown-content');
+
+            if (event.target == disclaimerModal) {
+                disclaimerModal.style.display = "none";
+            }
+            if (event.target == installIosModal) {
+                installIosModal.style.display = "none";
+            }
+            // Закриття меню при кліку поза ним
+            if (dropdownContent && !event.target.matches('.dropdown-toggle') && !event.target.closest('.dropdown-content')) {
+                if (dropdownContent.classList.contains('show')) {
+                    dropdownContent.classList.remove('show');
+                }
             }
         }
+
+        let installPrompt = null; // Зберігаємо deferred install prompt event
+
+        window.addEventListener('beforeinstallprompt', (event) => {
+            event.preventDefault(); // Запобігаємо автоматичному показу банера
+            installPrompt = event; // Зберігаємо подію, щоб її можна було викликати пізніше
+            console.log('Подія beforeinstallprompt викликана. PWA може бути встановлено.');
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
             updateDisplay();
             addToLog('log_game_start');
             updateAllTranslations(currentLang); // Initial translation on load
+
+            const downloadButton = document.getElementById('download-button');
+            const dropdownContent = document.querySelector('.dropdown-content');
+            const installPwaPcButton = document.getElementById('install-pwa-pc');
+            const installPwaIosButton = document.getElementById('install-pwa-ios'); // New button
+
+            if (downloadButton && dropdownContent) {
+                downloadButton.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    dropdownContent.classList.toggle('show');
+                });
+
+                if (installPwaPcButton) {
+                    installPwaPcButton.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        if (installPrompt) {
+                            installPrompt.prompt();
+                            installPrompt.userChoice.then((choiceResult) => {
+                                if (choiceResult.outcome === 'accepted') {
+                                    console.log('Користувач прийняв встановлення PWA');
+                                    // Додайте до логу або інше сповіщення
+                                } else {
+                                    console.log('Користувач відхилив встановлення PWA');
+                                }
+                                installPrompt = null;
+                            });
+                        } else {
+                            alert('Цей додаток вже встановлено або не може бути встановлений таким чином. Ви можете встановити його через меню браузера (іконка монітора зі стрілкою вгору/вниз у адресному рядку).');
+                        }
+                        dropdownContent.classList.remove('show');
+                    });
+                }
+
+                // New event listener for "Install on iPhone"
+                if (installPwaIosButton) {
+                    installPwaIosButton.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        closeModal('disclaimer-modal'); // Ensure other modals are closed
+                        openModal('install-ios-modal'); // Open the specific iOS instruction modal
+                        dropdownContent.classList.remove('show'); // Close the dropdown
+                    });
+                }
+            }
         });
 
         if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-navigator.serviceWorker.register('sw.js')
-      .then(registration => {
-        console.log('Service Worker зареєстровано:', registration);
-      })
-      .catch(error => {
-        console.error('Помилка реєстрації Service Worker:', error);
-      });
-  });
-}
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('Service Worker зареєстровано:', registration);
+                    })
+                    .catch(error => {
+                        console.error('Помилка реєстрації Service Worker:', error);
+                    });
+            });
+        }
     </script>
 </body>
 </html>

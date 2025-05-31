@@ -12,10 +12,10 @@
     <div id="disclaimer-modal" class="modal-overlay">
         <div class="modal-content container">
             <span class="close-button pixel-button" onclick="closeModal()">&times;</span>
-            <h2>ВАЖЛИВО!</h2>
-            <p>Цей сайт є <strong>неофіційним помічником</strong> для гри "Buckshot Roulette". Він створений фанатами для фанатів і не пов'язаний з офіційними розробниками гри.</p>
-            <p>Вся інформація та функціонал призначені виключно для розважальних цілей і не повинні сприйматися як офіційні дані або вказівки від розробників.</p>
-            <p>Будь ласка, підтримуйте офіційні релізи та розробників гри!</p>
+            <h2 data-uk="ВАЖЛИВО!" data-en="IMPORTANT!">ВАЖЛИВО!</h2>
+            <p data-uk="Цей сайт є <strong>неофіційним помічником</strong> для гри &quot;Buckshot Roulette&quot;. Він створений фанатами для фанатів і не пов'язаний з офіційними розробниками гри." data-en="This site is an <strong>unofficial companion</strong> for the game &quot;Buckshot Roulette&quot;. It is created by fans for fans and is not affiliated with the official game developers.">Цей сайт є **неофіційним помічником** для гри "Buckshot Roulette". Він створений фанатами для фанатів і не пов'язаний з офіційними розробниками гри.</p>
+            <p data-uk="Вся інформація та функціонал призначені виключно для розважальних цілей і не повинні сприйматися як офіційні дані або вказівки від розробників." data-en="All information and functionality are intended solely for entertainment purposes and should not be taken as official data or instructions from the developers.">Вся інформація та функціонал призначені виключно для розважальних цілей і не повинні сприйматися як офіційні дані або вказівки від розробників.</p>
+            <p data-uk="Будь ласка, підтримуйте офіційні релізи та розробників гри!" data-en="Please support the official releases and game developers!">Будь ласка, підтримуйте офіційні релізи та розробників гри!</p>
         </div>
     </div>
 
@@ -24,7 +24,7 @@
             <h1>Buckshot Roulette Buddy</h1>
 
             <div class="counter-section">
-                <h2>Бойові патрони</h2>
+                <h2 data-uk="Бойові патрони" data-en="Live Rounds">Бойові патрони</h2>
                 <div id="live-bullets-count" class="counter">0</div>
                 <div class="buttons">
                     <button class="pixel-button" onclick="changeBulletCount('live', -1)"><</button>
@@ -33,7 +33,7 @@
             </div>
 
             <div class="counter-section">
-                <h2>Холості патрони</h2>
+                <h2 data-uk="Холості патрони" data-en="Blank Rounds">Холості патрони</h2>
                 <div id="blank-bullets-count" class="counter">0</div>
                 <div class="buttons">
                     <button class="pixel-button" onclick="changeBulletCount('blank', -1)"><</button>
@@ -42,7 +42,7 @@
             </div>
 
             <div class="counter-section">
-                <h2>Раунд</h2>
+                <h2 data-uk="Раунд" data-en="Round">Раунд</h2>
                 <div id="round-number-display" class="counter">0</div>
                 <div class="buttons">
                     <button class="pixel-button" onclick="changeRound(-1)"><</button>
@@ -53,20 +53,20 @@
 
         <div class="right-column-wrapper">
             <div class="notepad-container container">
-                <h2>Блокнот</h2>
-                <textarea id="notepad-text" placeholder="Ваші нотатки тут..."></textarea>
-                <button class="pixel-button" onclick="clearNotepad()">Очистити блокнот</button>
+                <h2 data-uk="Блокнот" data-en="Notepad">Блокнот</h2>
+                <textarea id="notepad-text" placeholder="Ваші нотатки тут..." data-uk-placeholder="Ваші нотатки тут..." data-en-placeholder="Your notes here..."></textarea>
+                <button class="pixel-button" onclick="clearNotepad()" data-uk="Очистити блокнот" data-en="Clear Notepad">Очистити блокнот</button>
             </div>
 
             <div class="game-log-container container">
-                <h2>Журнал подій</h2>
+                <h2 data-uk="Журнал подій" data-en="Game Log">Журнал подій</h2>
                 <div id="game-log"></div>
-                <button class="pixel-button" onclick="clearGameLog()">Очистити журнал</button>
+                <button class="pixel-button" onclick="clearGameLog()" data-uk="Очистити журнал" data-en="Clear Log">Очистити журнал</button>
             </div>
 
             <div class="reset-section container">
                 <div class="reset-buttons-wrapper">
-                    <h2 class="pixel-button reset-title-button" onclick="resetGame()">Скинути гру</h2>
+                    <h2 class="pixel-button reset-title-button" onclick="resetGame()" data-uk="Скинути гру" data-en="Reset Game">Скинути гру</h2>
                     <button class="info-button pixel-button" onclick="openModal()">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z" stroke="#00ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -74,6 +74,13 @@
                             <path d="M16 13H8" stroke="#00ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M16 17H8" stroke="#00ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M10 9H8" stroke="#00ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="info-button pixel-button" onclick="toggleLanguage()" id="language-toggle-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                         </svg>
                     </button>
                 </div>
@@ -85,12 +92,159 @@
         let liveBullets = 0;
         let blankBullets = 0;
         let currentRound = 0;
+        let currentLang = 'uk'; // Default language
 
-        function addToLog(message) {
+        // Translations object
+        const translations = {
+            'uk': {
+                'disclaimer_title': 'ВАЖЛИВО!',
+                'disclaimer_p1': 'Цей сайт є <strong>неофіційним помічником</strong> для гри "Buckshot Roulette". Він створений фанатами для фанатів і не пов\'язаний з офіційними розробниками гри.',
+                'disclaimer_p2': 'Вся інформація та функціонал призначені виключно для розважальних цілей і не повинні сприйматися як офіційні дані або вказівки від розробників.',
+                'disclaimer_p3': 'Будь ласка, підтримуйте офіційні релізи та розробників гри!',
+                'live_bullets_title': 'Бойові патрони',
+                'blank_bullets_title': 'Холості патрони',
+                'round_title': 'Раунд',
+                'notepad_title': 'Блокнот',
+                'notepad_placeholder': 'Ваші нотатки тут...',
+                'clear_notepad_button': 'Очистити блокнот',
+                'game_log_title': 'Журнал подій',
+                'clear_log_button': 'Очистити журнал',
+                'reset_game_button': 'Скинути гру',
+                'log_bullet_add_live': 'Додано {amount} бойових патронів.',
+                'log_bullet_add_blank': 'Додано {amount} холостих патронів.',
+                'log_bullet_remove_live': 'Видалено {amount} бойових патронів.',
+                'log_bullet_remove_blank': 'Видалено {amount} холостих патронів.',
+                'log_round_change': 'Раунд змінено на: {round}. Патрони скинуто.',
+                'log_notepad_clear': 'Блокнот очищено.',
+                'log_game_log_clear': 'Журнал подій очищено.',
+                'log_game_reset': '**Гру повністю скинуто! Нова партія розпочата.**',
+                'log_game_start': 'Гра розпочата. Ласкаво просимо!',
+                'translate_button_alt': 'Перекласти Англійською', // This text won't be visible on the button itself now
+                'translate_button_uk_title': 'Перекласти Англійською', // Tooltip/title for UK
+                'translate_button_en_title': 'Translate to Ukrainian' // Tooltip/title for EN
+            },
+            'en': {
+                'disclaimer_title': 'IMPORTANT!',
+                'disclaimer_p1': 'This site is an <strong>unofficial companion</strong> for the game &quot;Buckshot Roulette&quot;. It is created by fans for fans and is not affiliated with the official game developers.',
+                'disclaimer_p2': 'All information and functionality are intended solely for entertainment purposes and should not be taken as official data or instructions from the developers.',
+                'disclaimer_p3': 'Please support the official releases and game developers!',
+                'live_bullets_title': 'Live Rounds',
+                'blank_bullets_title': 'Blank Rounds',
+                'round_title': 'Round',
+                'notepad_title': 'Notepad',
+                'notepad_placeholder': 'Your notes here...',
+                'clear_notepad_button': 'Clear Notepad',
+                'game_log_title': 'Game Log',
+                'clear_log_button': 'Clear Log',
+                'reset_game_button': 'Reset Game',
+                'log_bullet_add_live': 'Added {amount} live rounds.',
+                'log_bullet_add_blank': 'Added {amount} blank rounds.',
+                'log_bullet_remove_live': 'Removed {amount} live rounds.',
+                'log_bullet_remove_blank': 'Removed {amount} blank rounds.',
+                'log_round_change': 'Round changed to: {round}. Bullets reset.',
+                'log_notepad_clear': 'Notepad cleared.',
+                'log_game_log_clear': 'Game log cleared.',
+                'log_game_reset': '**Game fully reset! New game started.**',
+                'log_game_start': 'Game started. Welcome!',
+                'translate_button_alt': 'Translate to Ukrainian', // This text won't be visible on the button itself now
+                'translate_button_uk_title': 'Translate to Ukrainian', // Tooltip/title for UK
+                'translate_button_en_title': 'Перекласти Українською' // Tooltip/title for EN
+            }
+        };
+
+        function translateElement(element, lang) {
+            const ukText = element.dataset.uk;
+            const enText = element.dataset.en;
+            const placeholderUk = element.dataset.ukPlaceholder;
+            const placeholderEn = element.dataset.enPlaceholder;
+
+            if (lang === 'en' && enText !== undefined) {
+                element.textContent = enText;
+            } else if (lang === 'uk' && ukText !== undefined) {
+                element.textContent = ukText;
+            }
+
+            if (element.tagName === 'TEXTAREA') {
+                if (lang === 'en' && placeholderEn !== undefined) {
+                    element.placeholder = placeholderEn;
+                } else if (lang === 'uk' && placeholderUk !== undefined) {
+                    element.placeholder = placeholderUk;
+                }
+            }
+        }
+
+        function updateAllTranslations(lang) {
+            document.querySelectorAll('[data-uk]').forEach(element => {
+                // For disclaimer modal paragraphs, use innerHTML to preserve strong tags
+                // Check if element is a paragraph within the disclaimer modal
+                if (element.tagName === 'P' && element.closest('#disclaimer-modal')) {
+                    // Assuming data-translation-key is set on these paragraphs for direct mapping
+                    const translationKey = element.dataset.translationKey;
+                    if (translationKey && translations[lang][translationKey]) {
+                        element.innerHTML = translations[lang][translationKey];
+                    }
+                } else {
+                    translateElement(element, lang);
+                }
+            });
+            document.querySelectorAll('[data-uk-placeholder]').forEach(element => {
+                translateElement(element, lang);
+            });
+
+            // Specific update for disclaimer modal H2 and paragraphs
+            const disclaimerModal = document.getElementById('disclaimer-modal');
+            disclaimerModal.querySelector('h2').textContent = translations[lang]['disclaimer_title'];
+            // Explicitly set data-translation-key for paragraphs if not already there
+            disclaimerModal.querySelector('p:nth-of-type(1)').innerHTML = translations[lang]['disclaimer_p1'];
+            disclaimerModal.querySelector('p:nth-of-type(2)').innerHTML = translations[lang]['disclaimer_p2'];
+            disclaimerModal.querySelector('p:nth-of-type(3)').innerHTML = translations[lang]['disclaimer_p3'];
+
+            // Update title/tooltip for the language button
+            const translateButton = document.getElementById('language-toggle-button');
+            translateButton.title = lang === 'uk' ? translations[lang]['translate_button_uk_title'] : translations[lang]['translate_button_en_title'];
+
+            // Re-translate existing log entries
+            updateLogTranslations(lang);
+        }
+
+        function updateLogTranslations(lang) {
+            const logElement = document.getElementById('game-log');
+            Array.from(logElement.children).forEach(entry => {
+                const originalKey = entry.dataset.logKey;
+                const originalParams = JSON.parse(entry.dataset.logParams || '{}');
+                if (originalKey) {
+                    let message = translations[lang][originalKey];
+                    for (const key in originalParams) {
+                        // Ensure replacement handles string conversion for numbers
+                        message = message.replace(`{${key}}`, String(originalParams[key]));
+                    }
+                    // Extract timestamp and prepend to the translated message
+                    const timestampMatch = entry.textContent.match(/^\[.*?\]/);
+                    const timestamp = timestampMatch ? timestampMatch[0] : '';
+                    entry.textContent = `${timestamp} ${message}`.trim(); // Trim to remove potential double space
+                }
+            });
+        }
+
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'uk' ? 'en' : 'uk';
+            document.documentElement.lang = currentLang; // Update html lang attribute
+            updateAllTranslations(currentLang);
+        }
+
+        function addToLog(messageKey, params = {}) {
             const logElement = document.getElementById('game-log');
             const newEntry = document.createElement('p');
-            const timestamp = new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const timestamp = new Date().toLocaleTimeString(currentLang === 'uk' ? 'uk-UA' : 'en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+            let message = translations[currentLang][messageKey];
+            for (const key in params) {
+                message = message.replace(`{${key}}`, String(params[key])); // Convert param to string
+            }
             newEntry.textContent = `[${timestamp}] ${message}`;
+            newEntry.dataset.logKey = messageKey; // Store original key
+            newEntry.dataset.logParams = JSON.stringify(params); // Store original params
             logElement.prepend(newEntry);
 
             const maxLogEntries = 50;
@@ -118,13 +272,13 @@
             }
 
             if (liveBullets !== oldLive || blankBullets !== oldBlank) {
-                let logMessage = '';
+                let messageKey;
                 if (amount > 0) {
-                    logMessage = `Додано ${amount} ${type === 'live' ? 'бойових' : 'холостих'} патронів.`;
+                    messageKey = type === 'live' ? 'log_bullet_add_live' : 'log_bullet_add_blank';
                 } else {
-                    logMessage = `Видалено ${Math.abs(amount)} ${type === 'live' ? 'бойових' : 'холостих'} патронів.`;
+                    messageKey = type === 'live' ? 'log_bullet_remove_live' : 'log_bullet_remove_blank';
                 }
-                addToLog(logMessage);
+                addToLog(messageKey, { amount: Math.abs(amount) });
             }
             
             updateDisplay();
@@ -140,7 +294,7 @@
             if (currentRound !== previousRound) {
                 liveBullets = 0;
                 blankBullets = 0;
-                addToLog(`Раунд змінено на: ${currentRound}. Патрони скинуто.`);
+                addToLog('log_round_change', { round: currentRound });
             }
             
             updateDisplay();
@@ -148,32 +302,22 @@
 
         function clearNotepad() {
             document.getElementById('notepad-text').value = '';
-            addToLog('Блокнот очищено.');
+            addToLog('log_notepad_clear');
         }
 
         function clearGameLog() {
             document.getElementById('game-log').innerHTML = '';
-            addToLog('Журнал подій очищено.');
+            addToLog('log_game_log_clear');
         }
 
         function resetGame() {
-            // Ці рядки коду, що стосуються glitchOverlay, ВИДАЛЕНО
-            // const glitchOverlay = document.getElementById('glitch-overlay');
-            // glitchOverlay.style.display = 'block';
-
-            // setTimeout(() => {
-                liveBullets = 0;
-                blankBullets = 0;
-                currentRound = 0;
-                document.getElementById('notepad-text').value = '';
-                document.getElementById('game-log').innerHTML = '';
-                updateDisplay();
-                addToLog('**Гру повністю скинуто! Нова партія розпочата.**');
-            // }, 100);
-
-            // setTimeout(() => {
-            //     glitchOverlay.style.display = 'none';
-            // }, 3000);
+            liveBullets = 0;
+            blankBullets = 0;
+            currentRound = 0;
+            document.getElementById('notepad-text').value = '';
+            document.getElementById('game-log').innerHTML = '';
+            updateDisplay();
+            addToLog('log_game_reset');
         }
 
         // Функції для модального вікна
@@ -195,7 +339,8 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             updateDisplay();
-            addToLog('Гра розпочата. Ласкаво просимо!');
+            addToLog('log_game_start');
+            updateAllTranslations(currentLang); // Initial translation on load
         });
     </script>
 </body>

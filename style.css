@@ -133,8 +133,8 @@ button,
     text-align: left;
     height: 250px;
     background-color: #2a2a2a;
-    border-color: #006600;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+    border-color: #555;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
     padding-bottom: 15px;
     display: flex;
     flex-direction: column;
@@ -397,7 +397,7 @@ h1 {
 }
 
 .info-button:hover svg {
-    stroke: #1a1a1a; /* Колір обведення при наведенні (чорний) */
+    stroke: #00ff00; /* Колір обведення при наведенні (чорний) */
     fill: #1a1a1a;    /* Колір заповнення при наведенні (чорний) */
 }
 
@@ -425,3 +425,4 @@ h1 {
         right: 3px;
     }
 }
+

@@ -2,18 +2,18 @@
   "name": "Buckshot Roulette Buddy",
   "short_name": "BR Buddy",
   "description": "Unofficial companion for Buckshot Roulette game.",
-  "start_url": "/index.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#282c34",
   "theme_color": "#00ff00",
   "icons": [
     {
-      "src": "logo-192x192.png",
+      "src": "logo.jpg",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "logo-512x512.png",
+      "src": "logo.jpg",
       "sizes": "512x512",
       "type": "image/png"
     }

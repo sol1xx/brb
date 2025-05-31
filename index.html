@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buckshot Roulette Buddy</title>
     <link rel="apple-touch-icon" href="logo.jpg">
+    <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="logo.jpg" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -343,6 +344,18 @@
             addToLog('log_game_start');
             updateAllTranslations(currentLang); // Initial translation on load
         });
+
+        if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('Service Worker зареєстровано:', registration);
+      })
+      .catch(error => {
+        console.error('Помилка реєстрації Service Worker:', error);
+      });
+  });
+}
     </script>
 </body>
 </html>

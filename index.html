@@ -9,6 +9,20 @@
     <link rel="icon" href="logo.jpg" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* Add some basic styling for the bullet images */
+        .bullet-icon {
+            width: 24px; /* Adjust size as needed */
+            height: 24px;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        .counter-section h2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
 </head>
 <body>
     <div id="disclaimer-modal" class="modal-overlay">
@@ -41,7 +55,10 @@
             <h1>Buckshot Roulette Buddy</h1>
 
             <div class="counter-section">
-                <h2 data-uk="Бойові патрони" data-en="Live Rounds">Бойові патрони</h2>
+                <h2 data-uk="Бойові патрони" data-en="Live Rounds">
+                    <img src="live_bullet.png" alt="Live Bullet Icon" class="bullet-icon">
+                    Бойові патрони
+                </h2>
                 <div id="live-bullets-count" class="counter">0</div>
                 <div class="buttons">
                     <button class="pixel-button" onclick="changeBulletCount('live', -1)"><</button>
@@ -50,7 +67,10 @@
             </div>
 
             <div class="counter-section">
-                <h2 data-uk="Холості патрони" data-en="Blank Rounds">Холості патрони</h2>
+                <h2 data-uk="Холості патрони" data-en="Blank Rounds">
+                    <img src="blank_bullet.png" alt="Blank Bullet Icon" class="bullet-icon">
+                    Холості патрони
+                </h2>
                 <div id="blank-bullets-count" class="counter">0</div>
                 <div class="buttons">
                     <button class="pixel-button" onclick="changeBulletCount('blank', -1)"><</button>
@@ -126,6 +146,34 @@
         let blankBullets = 0;
         let currentRound = 0;
         let currentLang = 'uk'; // Default language
+
+        // Roman numeral conversion function
+        function toRoman(num) {
+            if (num <= 0) return '0'; // Or handle as an error/empty string if rounds don't start at 0
+            const romanNumerals = [
+                { value: 1000, numeral: 'M' },
+                { value: 900, numeral: 'CM' },
+                { value: 500, numeral: 'D' },
+                { value: 400, numeral: 'CD' },
+                { value: 100, numeral: 'C' },
+                { value: 90, numeral: 'XC' },
+                { value: 50, numeral: 'L' },
+                { value: 40, numeral: 'XL' },
+                { value: 10, numeral: 'X' },
+                { value: 9, numeral: 'IX' },
+                { value: 5, numeral: 'V' },
+                { value: 4, numeral: 'IV' },
+                { value: 1, numeral: 'I' }
+            ];
+            let roman = '';
+            for (let i = 0; i < romanNumerals.length; i++) {
+                while (num >= romanNumerals[i].value) {
+                    roman += romanNumerals[i].numeral;
+                    num -= romanNumerals[i].value;
+                }
+            }
+            return roman;
+        }
 
         // Translations object
         const translations = {
@@ -208,9 +256,9 @@
             const placeholderEn = element.dataset.enPlaceholder;
 
             if (lang === 'en' && enText !== undefined) {
-                element.innerHTML = enText; // Use innerHTML to parse SVG
+                element.innerHTML = enText; // Use innerHTML to parse SVG and image tags
             } else if (lang === 'uk' && ukText !== undefined) {
-                element.innerHTML = ukText; // Use innerHTML to parse SVG
+                element.innerHTML = ukText; // Use innerHTML to parse SVG and image tags
             }
 
             if (element.tagName === 'TEXTAREA') {
@@ -255,7 +303,20 @@
                         }
                     }
                 } else {
-                    translateElement(element, lang);
+                    // For bullet titles, we need to preserve the image and only change text content
+                    if (element.id === 'live-bullets-title' || element.id === 'blank-bullets-title') {
+                        const img = element.querySelector('.bullet-icon');
+                        if (img) {
+                            const newText = lang === 'en' ? element.dataset.en : element.dataset.uk;
+                            element.innerHTML = ''; // Clear current content
+                            element.appendChild(img); // Re-add the image
+                            element.append(document.createTextNode(newText)); // Add the translated text
+                        } else {
+                            translateElement(element, lang); // Fallback if no image
+                        }
+                    } else {
+                        translateElement(element, lang);
+                    }
                 }
             });
             document.querySelectorAll('[data-uk-placeholder]').forEach(element => {
@@ -275,15 +336,9 @@
             if (installIosModal) {
                 installIosModal.querySelector('h2').textContent = translations[lang]['install_ios_title'];
                 installIosModal.querySelector('p:nth-of-type(1)').innerHTML = translations[lang]['install_ios_p1'];
-                // These are already handled by data-uk/data-en with innerHTML in the loop,
-                // but good to keep these for clarity if they were more complex.
-                // For now, they are correctly handled by the general data-uk loop above due to innerHTML.
-                // installIosModal.querySelector('ol li:nth-of-type(1)').innerHTML = translations[lang]['install_ios_li1'];
-                // installIosModal.querySelector('ol li:nth-of-type(2)').innerHTML = translations[lang]['install_ios_li2'];
-                // installIosModal.querySelector('ol li:nth-of-type(3)').innerHTML = translations[lang]['install_ios_li3'];
                 installIosModal.querySelector('p:nth-of-type(2)').innerHTML = translations[lang]['install_ios_p2'];
             }
-            
+
             const translateButton = document.getElementById('language-toggle-button');
             if (translateButton) {
                 translateButton.title = lang === 'uk' ? translations[lang]['translate_button_uk_title'] : translations[lang]['translate_button_en_title'];
@@ -311,8 +366,14 @@
                 const originalParams = JSON.parse(entry.dataset.logParams || '{}');
                 if (originalKey) {
                     let message = translations[lang][originalKey];
+                    // Replace {round} with Roman numeral if it's a round change log
+                    if (originalKey === 'log_round_change' && originalParams.round !== undefined) {
+                        message = message.replace(`{round}`, toRoman(originalParams.round));
+                    }
                     for (const key in originalParams) {
-                        message = message.replace(`{${key}}`, String(originalParams[key]));
+                        if (key !== 'round' || originalKey !== 'log_round_change') { // Already handled round
+                            message = message.replace(`{${key}}`, String(originalParams[key]));
+                        }
                     }
                     const timestampMatch = entry.textContent.match(/^\[.*?\]/);
                     const timestamp = timestampMatch ? timestampMatch[0] : '';
@@ -325,6 +386,7 @@
             currentLang = currentLang === 'uk' ? 'en' : 'uk';
             document.documentElement.lang = currentLang;
             updateAllTranslations(currentLang);
+            updateDisplay(); // Ensure round display is updated after language change
         }
 
         function addToLog(messageKey, params = {}) {
@@ -335,12 +397,20 @@
             const timestamp = new Date().toLocaleTimeString(currentLang === 'uk' ? 'uk-UA' : 'en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
             let message = translations[currentLang][messageKey];
-            for (const key in params) {
-                message = message.replace(`{${key}}`, String(params[key]));
+            let displayParams = { ...params }; // Create a copy to modify for display
+
+            // Special handling for round number in log to display Roman numerals
+            if (messageKey === 'log_round_change' && displayParams.round !== undefined) {
+                message = message.replace(`{round}`, toRoman(displayParams.round));
+            } else {
+                for (const key in displayParams) {
+                    message = message.replace(`{${key}}`, String(displayParams[key]));
+                }
             }
+            
             newEntry.textContent = `[${timestamp}] ${message}`;
             newEntry.dataset.logKey = messageKey;
-            newEntry.dataset.logParams = JSON.stringify(params);
+            newEntry.dataset.logParams = JSON.stringify(params); // Store original params for re-translation
             logElement.prepend(newEntry);
 
             const maxLogEntries = 50;
@@ -356,7 +426,7 @@
 
             if (liveBulletsCount) liveBulletsCount.textContent = liveBullets;
             if (blankBulletsCount) blankBulletsCount.textContent = blankBullets;
-            if (roundNumberDisplay) roundNumberDisplay.textContent = currentRound;
+            if (roundNumberDisplay) roundNumberDisplay.textContent = toRoman(currentRound);
         }
 
         function changeBulletCount(type, amount) {
@@ -494,7 +564,7 @@
                                 installPrompt = null;
                             });
                         } else {
-                            alert('Цей додаток вже встановлено або не може бути встановлений таким чином. Ви можете встановити його через меню браузера (іконка монітора зі стрілкою вгору/вниз у адресному рядку).');
+                            alert(currentLang === 'uk' ? 'Цей додаток вже встановлено або не може бути встановлений таким чином. Ви можете встановити його через меню браузера (іконка монітора зі стрілкою вгору/вниз у адресному рядку).' : 'This app is already installed or cannot be installed this way. You might be able to install it through your browser\'s menu (monitor icon with an up/down arrow in the address bar).');
                         }
                         dropdownContent.classList.remove('show');
                     });
